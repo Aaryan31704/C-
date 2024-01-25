@@ -1,0 +1,138 @@
+//SLL in c++
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+
+struct node{
+	int data;
+	struct node* link;
+	node(){
+		cin>>data;
+		link = NULL;
+	}
+};
+class sll{
+	node* first;
+	public: sll():first(NULL){}
+			void insert_rear();
+			void insert_front();
+			void del_front();
+			void del_rear();
+			void display();
+			void insert_pos();
+			void del_pos();
+};
+void sll :: insert_front(){
+	node* t = new node;
+	if(first != NULL)
+		t->link = first;
+	first = t;
+}
+void sll :: insert_rear(){
+	node* t = new node;
+	node* h=first;
+	node* prev;
+	if(first == NULL){
+		first = t;
+		return;
+	}
+	for(;h != NULL;h=h->link)
+		prev = h;
+	prev->link = t;
+}
+void sll :: del_front(){
+	if(first == NULL){
+		cout<<"SLL Empty\n";
+		return;
+	}
+	node* temp = first;
+	node* next = temp->link;
+	delete temp;
+	first = next;
+}				
+void sll :: del_rear(){
+	if(first == NULL){
+		cout<<"SLL Empty\n";
+		return;
+	}
+	node* h = first;
+	node*prev;
+	for(;h != NULL;h=h->link)
+		prev = h;
+	h = prev->link;
+	delete h;
+	prev->link = 0;
+}
+void sll :: display(){
+	if(first == NULL){
+		cout<<"SLL Empty\n";
+		return;
+	}
+	node* h = first;
+	for(;h != NULL;h=h->link)
+		cout<<h->data<<"->";
+	cout<<"NULL"<<endl;
+}
+void sll :: insert_pos(){
+	int pos,count=0;
+	cout<<"Enter pos\n";
+	cin>>pos;
+	
+	node*h = first;
+	for(;h!=NULL;h=h->link){
+		count = count + 1;
+		//cout<<"Count:"<<count<<endl;
+	}	
+	if(pos <0 and pos >count){
+		cout<<"Invalid pos\n";
+		return;
+	}
+	node*t = new node;
+	if(pos == 0){
+		t->link = first;
+		first = t;
+	}
+	node* next=NULL;
+	h = first;		
+	for(int i=1;i<pos-1;i++)
+		h= h->link;
+	
+	next = h->link;
+	h->link = t;
+	t->link = next;
+	
+}
+void sll :: del_pos(){
+	int pos,count=0;
+	cout<<"Enter pos\n";
+	cin>>pos;
+	node* h =first;
+	if(first == NULL){
+		cout<<"SLL Empty\n";
+		return;
+	}	
+	for(;h!=NULL;h=h->link){
+		count = count + 1;
+		//cout<<"Count:"<<count<<endl;
+	}
+	
+}			
+
+int main(){
+	sll s;
+	int ch;
+	cout<<"1.Insert front\n2.Insert rear\n3.Delete front\n4.Delete rear\n5.display\n6.insert at pos\n7.exit\n";
+	for(;;){
+		cout<<"Enter choice:";
+		cin>>ch;
+		switch(ch){
+			case 1: s.insert_front();break;
+			case 2: s.insert_rear();break;	
+			case 3: s.del_front();break;
+			case 4: s.del_rear();break;
+			case 5: s.display();break;
+			case 6: s.insert_pos();break;
+			case 7: exit(0);
+		}
+	}
+}			
