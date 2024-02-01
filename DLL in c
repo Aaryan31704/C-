@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+	int data;
+	struct node* llink;
+	struct node* rlink;
+};
+typedef struct node nd;
+
+nd* insert_front(nd*);
+nd* insert_rear(nd*);
+nd* del_front(nd*);
+nd* del_rear(nd*);
+void display(nd*);
+
+int main(){
+	int ch;
+	nd* first = NULL;
+	printf("1.insert front\n2.insert rear\n3.delete front\n4.delete rear\n");
+	for(;;){
+		printf("Enter choice\n");
+		scanf("%d",&ch);
+		switch(ch){
+			case 1:first = insert_front(first);break;
+			case 2:first = insert_rear(first);break;
+			case 3:first = del_front(first);break;
+			case 4:first = del_rear(first);break;
+			case 5:display(first);break;
+		}
+	}
+}
+
+nd* insert_front(nd* f){
+	nd* t = (nd*)malloc(sizeof(nd));
+	printf("Enter data:");
+	scanf("%d",&(t->data));
+	t->llink = t->rlink = NULL;
+	if(f != NULL){
+		t->rlink = f;
+		f->llink = t;
+	}
+	return t;	
+}				
+nd* insert_rear(nd* f){
+	nd* h = NULL;
+	nd* t = (nd*)malloc(sizeof(nd));
+	printf("Enter data:");
+	scanf("%d",&(t->data));
+	t->llink = t->rlink = NULL;	
+	if(f == NULL)
+		return t;
+	for(h = f;h->rlink!=NULL;h=h->rlink);
+	h->rlink = t;
+	t->llink = h;
+	return f;
+}
+nd* del_front(nd* f){
+	if(f == NULL){
+		printf("DLL empty\n");
+		return f;
+	}	
+	nd* temp = f;
+	nd*next = f->rlink;
+	printf("data deleted:%d\n",temp->data);
+	next->llink = 0;
+	return next;
+}
+nd* del_rear(nd*f){
+	nd* last = NULL;
+	if(f == NULL){
+		printf("DLL empty\n");
+		return f;
+	}
+	for(nd* h = f;h->rlink != NULL;h = h->rlink)
+		last = h;
+	nd*next = last->rlink;	
+	printf("data deleted:%d\n",next->data);
+	last->rlink=0;
+	free (next);
+	return f;
+}
+void display(nd* f){
+	if(f == NULL){
+		printf("DLL Empty\n");
+		return;
+	}
+	for(nd*h = f;h!= NULL;h= h->rlink)
+		printf("%d->",h->data);
+	printf("NULL\n");
+}
+			
+					
