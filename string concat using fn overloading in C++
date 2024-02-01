@@ -1,0 +1,54 @@
+class str{
+	char* s;
+	public :str():s(NULL){}
+			  str(const char* st){
+			  		cout<<"In PC\n";
+			  		s = new char[strlen(st) + 1];
+			  		strcpy(s,st);
+			  	}
+			  	str(const str &q){
+			  		cout<<"In copy consructor\n";
+			  		s = new char[strlen(q.s) + 1];
+			  		strcpy(s,q.s);
+			  	}
+			  	~str(){
+			  		delete []s;
+			  	}
+			  	void accept();
+			  	void display();
+			  	str operator+(const str&);
+			  	str operator=(const str&);
+};
+void str :: accept(){
+	s = new char[100];
+	cin >> s;
+	s = (char*)realloc(s,strlen(s) + 1);
+}
+void str :: display(){
+	cout << s;
+}
+str str :: operator+(const str& p){
+	cout<<"In Overloaded + func"<<endl;
+	str r;
+	r.s = new char[(strlen(s) + strlen(p.s)) + 1];
+	strcpy(r.s,s);
+	strcat(r.s,p.s);
+	return r;
+}
+str str :: operator=(const str&p){
+	cout<<"In overloaded = func"<<endl;
+	s = new char[strlen(p.s) + 1];
+	strcpy(s,p.s);
+	return *this;
+}
+int main(){
+	str a("abc"),b("xyz");
+	str c;
+	c = a+b;
+	c.display();
+	str p,q,r;
+	p.accept();
+	q.accept();
+	r = p + q;
+	r.display();
+}
