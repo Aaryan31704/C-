@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+//Creating node which contains data,rlink & llink
 struct node{
 	int data;
 	struct node* llink;
@@ -30,7 +30,7 @@ int main(){
 		}
 	}
 }
-
+//insert front func
 nd* insert_front(nd* f){
 	nd* t = (nd*)malloc(sizeof(nd));
 	printf("Enter data:");
@@ -41,7 +41,8 @@ nd* insert_front(nd* f){
 		f->llink = t;
 	}
 	return t;	
-}				
+}
+//insert rear func
 nd* insert_rear(nd* f){
 	nd* h = NULL;
 	nd* t = (nd*)malloc(sizeof(nd));
@@ -55,6 +56,7 @@ nd* insert_rear(nd* f){
 	t->llink = h;
 	return f;
 }
+//delete front func
 nd* del_front(nd* f){
 	if(f == NULL){
 		printf("DLL empty\n");
@@ -66,6 +68,7 @@ nd* del_front(nd* f){
 	next->llink = 0;
 	return next;
 }
+//delete rear func
 nd* del_rear(nd*f){
 	nd* last = NULL;
 	if(f == NULL){
@@ -80,6 +83,7 @@ nd* del_rear(nd*f){
 	free (next);
 	return f;
 }
+//display func
 void display(nd* f){
 	if(f == NULL){
 		printf("DLL Empty\n");
