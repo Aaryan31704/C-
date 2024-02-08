@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+#define MAX 10
+template<class T> class stack{
+	int top = -1;
+	T s[MAX];
+	public: void push();
+			void pop();
+			void display();
+};
+template<class T> void stack<T>::push(){
+	if(top == MAX-1){
+		cout<<"Stack overflow\n";
+		return;
+	}
+	cout<<"Enter element:";
+	cin>>s[++top];
+	return;
+}	
+template<class T> void stack<T>::pop(){
+	if (top == -1){
+		cout<<"Stack unerflow\n";
+		return;
+	}
+	cout<<"Element deleted:"<<s[top--];	
+	return;
+}
+template<class T> void stack<T>::display(){
+	if(top == -1){
+		cout<<"Stack Empty\n";
+		return;
+	}
+	cout<<"Contents of stack:\n";
+	for(int i = top;i>=0;i--)
+		cout<<s[i]<<endl;
+	return;
+}
+int main(){
+	stack<char> st;
+	int choice;
+	cout<<"1.Push\n2.Pop\n3.Display\n";
+	for(;;){
+		cout<<"Enter the choice:";
+		cin>>choice;
+		switch(choice){
+			case 1: st.push();break;
+			case 2: st.pop();break;
+			case 3: st.display();break;
+		}
+	}
+}	
