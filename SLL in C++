@@ -21,6 +21,7 @@ class sll{
 			void display();
 			void insert_pos();
 			void del_pos();
+			void mid();
 };
 void sll :: insert_front(){
 	node* t = new node;
@@ -116,12 +117,21 @@ void sll :: del_pos(){
 		//cout<<"Count:"<<count<<endl;
 	}
 	
-}			
+}
+void sll :: mid(){
+	node* fast = first;
+	node* slow = first;
+	while(fast!= NULL && fast->link!= NULL){
+		fast = fast->link->link;
+		slow = slow->link;
+	}
+	cout<<"Middle Element:"<<slow->data<<endl;
+}
 
 int main(){
 	sll s;
 	int ch;
-	cout<<"1.Insert front\n2.Insert rear\n3.Delete front\n4.Delete rear\n5.display\n6.insert at pos\n7.exit\n";
+	cout<<"1.Insert front\n2.Insert rear\n3.Delete front\n4.Delete rear\n5.display\n6.insert at pos\n7.Middle Element\n8.Exit\n";
 	for(;;){
 		cout<<"Enter choice:";
 		cin>>ch;
@@ -132,7 +142,8 @@ int main(){
 			case 4: s.del_rear();break;
 			case 5: s.display();break;
 			case 6: s.insert_pos();break;
-			case 7: exit(0);
+			case 7: s.mid();break;
+			case 8: exit(0);
 		}
 	}
 }			
