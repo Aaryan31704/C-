@@ -119,6 +119,9 @@ void sll :: del_pos(){
 	
 }
 void sll :: mid(){
+	if(first == NULL){
+		cout<<"SLL Empty\n";return;
+	}
 	node* fast = first;
 	node* slow = first;
 	while(fast!= NULL && fast->link!= NULL){
